@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8" />
+  <title>侏罗纪世界</title>
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="一款欢乐向策略冒险游戏" />
+  <style>
+    body {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+      visibility: visible !important;
+      opacity: 1 !important;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* Main container */
+    #main {
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header styles */
+    #header {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #header .main {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    #header-logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #header-logo img {
+      height: 48px;
+      margin-right: 10px;
+    }
+
+    #header-developer {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    #header-developer:hover {
+      background-color: #45a049;
+    }
+
+    /* Content styles */
+    #content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    #first_screen {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    #main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-group {
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo-box {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .sub-title {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    /* Download section */
+    .download-group {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .download-group>div {
+      margin: 0 15px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #qrcode {
+      width: 132px;
+      height: 132px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .web-download-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .web-download-android,
+    .web-download-iphone {
+      transition: transform 0.2s;
+    }
+
+    .web-download-android:hover,
+    .web-download-iphone:hover {
+      transform: scale(1.05);
+    }
+
+    #mobile-download-box {
+      display: none;
+    }
+
+    /* Footer styles */
+    #footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      z-index: 10;
+    }
+
+    #footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    #footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* GitHub corner */
+    .github-corner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    .github-corner:hover .octo-arm {
+      animation: octocat-wave 560ms ease-in-out;
+    }
+
+    @keyframes octocat-wave {
+
+      0%,
+      100% {
+        transform: rotate(0);
+      }
+
+      20%,
+      60% {
+        transform: rotate(-25deg);
+      }
+
+      40%,
+      80% {
+        transform: rotate(10deg);
+      }
+    }
+
+    /* WeChat tips */
+    .wechat-tips {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7) url('https://image.idealclover.cn/projects/Easy-to-Download/wechat_tips.png') no-repeat right top;
+      background-size: 100% auto;
+      z-index: 999;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .pc-display {
+        display: none;
+      }
+
+      .mobile-display {
+        display: block;
+      }
+
+      .download-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .download-group>div {
+        margin: 0 0 20px;
+      }
+
+      .web-download-box {
+        display: none;
+      }
+
+      #mobile-download-box {
+        display: block;
+        margin-top: 20px;
+      }
+
+      .mobile-download-button-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .mobile-download-button-box img {
+        width: 200px;
+      }
+
+      #main-content {
+        padding: 20px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .sub-title {
+        font-size: 16px;
+      }
+
+      .logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .github-corner svg {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .pc-display {
+        display: block;
+      }
+
+      .mobile-display {
+        display: none;
+      }
+    }
+
+    /* Share button styles */
+    .share {
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .share:hover {
+      opacity: 0.8;
+    }
+
+    /* Animation for page load */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Fix for the initial visibility issue */
+    body {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Weui flex classes */
+    .weui-flex {
+      display: flex;
+    }
+
+    .weui-flex__item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Image styles */
+    .image {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Fix for mobile layout */
+    @media (max-width: 480px) {
+      #header .main {
+        width: 100%;
+        padding: 0 15px;
+      }
+
+      #header-logo span {
+        font-size: 20px;
+      }
+
+      #header-developer .shareText {
+        font-size: 14px !important;
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-71e36876.js"></script>
+  <link rel="stylesheet" href="/assets/index-40ad3bc0.css">
+</head>
+
+<body>
+  <div id="main" style="background-image: url(/assets/image-e7b970dc.png)">
+    <div id="header" style="padding: 20px 0" googl="true">
+      <div class="main" style="width: 1000px">
+        <a href="/" style="text-decoration: none">
+          <span id="header-logo" style="display: flex; justify-content: left; align-items: center">
+            <img style="height: 48px; margin-right: 10px" src="/assets/logo-b0746121.png" alt="" />
+            <span>侏罗纪世界</span>
+          </span>
+        </a>
+        <a id="header-developer" href="#" class="share" style="text-decoration: none">
+          <span class="shareText" style="font-size: 16px"> 分享此应用 </span>
+        </a>
+      </div>
+    </div>
+    <div id="content">
+      <div id="first_screen">
+        <div id="main-content" googl="true">
+          <div class="text-group">
+            <div class="weui-flex logo-box">
+              <div class="weui-flex__item">
+                <img class="logo" src="/assets/logo-b0746121.png" alt="侏罗纪世界" />
+              </div>
+            </div>
+            <div class="weui-flex">
+              <div class="weui-flex__item">
+                <p class="title" style="color: black">侏罗纪世界</p>
+                <p class="sub-title mobile-display" style="color: black">打造轻松有趣的策略挑战</p>
+                <p class="sub-title pc-display" style="color: black">打造轻松有趣的策略挑战</p>
+              </div>
+            </div>
+            <div class="download-group">
+              <div>
+                <figure class="image">
+                  <img src="" id="qrcode" alt="扫码下载APP" />
+                </figure>
+                <p style="font-size: 13px; align-self: center">
+                  手机扫码下载APP
+                </p>
+              </div>
+
+              <!-- <div style="margin-left: 15px">
+                  <figure class="image">
+                    <img
+                      src=""
+                      alt="扫码查看小程序"
+                      style="width: 132px"
+                    />
+                  </figure>
+                  <p style="font-size: 13px; align-self: center">
+                    微信小程序：心花日记
+                  </p>
+                </div> -->
+
+              <div class="web-download-box" style="
+                    background-color: transparent;
+                    justify-content: space-around;
+                    height: 154px;
+                    padding: 0;
+                    margin-left: 15px;
+                  ">
+                <a class="web-download-android" href="https://7072-prod-5ga5ufvn126baa57-1353170510.tcb.qcloud.la/%E6%81%90%E9%BE%99%E6%8A%97%E7%8B%BC.apk?sign=2a8ade1ca6ff7970e5241df293b86eca&t=1744433781" target="_blank" style="height: 60px">
+                  <img class="web-download-android"
+                    src="https://image.idealclover.cn/projects/Easy-to-Download/android_normal.png" alt="立即下载Android"
+                    style="height: 60px" />
+                </a>
+                <!-- <a
+                    class="web-download-iphone"
+                    href="https://apps.apple.com/cn/app/id1511705694"
+                    target="_blank"
+                    style="height: 60px; margin-top: 10px"
+                  >
+                    <img
+                      src="https://image.idealclover.cn/projects/Easy-to-Download/iphone_normal.png"
+                      alt="立即下载iOS"
+                      style="height: 60px"
+                    />
+                  </a> -->
+                <!-- <a
+                    href="https://m.flowerdiary.top"
+                    target="_blank"
+                    style="color: white; text-align: center; margin-top: 10px"
+                  >
+                    进入网页版
+                  </a> -->
+              </div>
+            </div>
+            <div id="mobile-download-box" class="weui-flex">
+              <div class="weui-flex__item">
+                <div class="mobile-download-button-box">
+                  <a href="" id="download-link">
+                    <img src="https://image.idealclover.cn/projects/Easy-to-Download/download_now.png" alt="立即下载" />
+                  </a>
+                  <button style="background: transparent; border: 0; margin-top: 10px;" class="share">
+                    <span class="shareText" style="font-size: 16px; color: #888">分享此应用</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: none">
+      <img src="https://image.idealclover.cn/projects/Easy-to-Download/android_hover.png" alt="立即下载" />
+      <img src="https://image.idealclover.cn/projects/Easy-to-Download/iphone_hover.png" alt="立即下载" />
+    </div>
+  </div>
+  <section class="wechat-tips">
+    <!-- 内容为背景图 -->
+  </section>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP7NWBCL10"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-RP7NWBCL10");
+  </script>
+</body>
+
+</html>
